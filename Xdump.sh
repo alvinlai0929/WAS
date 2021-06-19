@@ -4,3 +4,7 @@
 #-Xdump:what通用 JVM 參數觀察默認配置 
 
 java -version -Xdump:what
+
+-Xdump:directory=/var/dumps/
+
+#指定位置
