@@ -7,4 +7,4 @@ java -version -Xdump:what
 
 -Xdump:directory=/var/dumps/
 
-#指定位置
+#指定log存放位置
