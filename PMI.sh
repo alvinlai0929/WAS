@@ -55,7 +55,7 @@ sigs  = ['java.lang.String', 'java.lang.Boolean']
 print AdminControl.invoke_jmx (perfOName, 'setCustomSetString', params, sigs)
 print "------------------------------------------------------------------------ \n"
 
-
+#這段就是我們要的資訊 FreeMemory UsedMemory UpTime ProcessCpuUsage
 print "\n---------------------------------------------------------------------- "
 print "Invoke getStatsObject operation"
 print "------------------------------------------------------------------------ "
