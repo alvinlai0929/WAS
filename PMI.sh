@@ -67,7 +67,7 @@ sigs = ['javax.management.ObjectName', 'java.lang.Boolean']
 
 print AdminControl.invoke_jmx (perfOName, 'getStatsObject', params, sigs)
 print "------------------------------------------------------------------------ \n"
-
+#＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃
 
 print "\n---------------------------------------------------------------------- "
 print "Invoke getInstrumentationLevelString operation"
@@ -75,11 +75,13 @@ print "------------------------------------------------------------------------ 
 print AdminControl.invoke (perfName, 'getInstrumentationLevelString')
 print "------------------------------------------------------------------------ \n"
 
-
+#PMI 層次字串可以如同 pmi=level（其中 level 是 n、l、m、h 或 x）
+#The PMI specification levels include: none, basic, extended, all, or custom
+#設定為最大 X
 print "\n---------------------------------------------------------------------- "
 print "Invoke setInstrumentationLevel operation - enable/disable PMI counters "
 print "------------------------------------------------------------------------ "
-params = ['pmi=l', java.lang.Boolean ('true')]
+params = ['pmi=h', java.lang.Boolean ('true')]
 
 sigs = ['java.lang.String', 'java.lang.Boolean']
 
@@ -103,15 +105,12 @@ print "------------------------------------------------------------------------ 
 print "\n---------------------------------------------------------------------- "
 print "Invoke getStatsString (ObjectName, String, Boolean) operation"
 print "------------------------------------------------------------------------ "
-mySrvName = AdminControl.completeObjectName ('type=Server,name=server1,node=wcsNode,*')
+#mySrvName = AdminControl.completeObjectName ('type=Server,name=server1,node=wcsNode,*')
+#
+mySrvName = AdminControl.completeObjectName ('type=Server,name=TBB_APserver,node=TBB_WMSNode,*')
+params = [AdminControl.makeObjectName (mySrvName),'beanModule',java.lang.Boolean ('true')]
 
-params = [AdminControl.makeObjectName (mySrvName),
-          'beanModule',
-          java.lang.Boolean ('true')]
-
-sigs = ['javax.management.ObjectName',
-        'java.lang.String',
-        'java.lang.Boolean')
+sigs = ['javax.management.ObjectName','java.lang.String','java.lang.Boolean']
 
 print AdminControl.invoke_jmx (perfOName, 'getStatsString', params, sigs)
 print "------------------------------------------------------------------------ \n"
@@ -120,7 +119,8 @@ print "------------------------------------------------------------------------ 
 print "\n---------------------------------------------------------------------- "
 print "Invoke listStatMemberNames operation"
 print "------------------------------------------------------------------------ "
-mySrvName = AdminControl.completeObjectName ('type=Server,name=server1,node=wcsNode,*')
+#mySrvName = AdminControl.completeObjectName ('type=Server,name=server1,node=wcsNode,*')
+mySrvName = AdminControl.completeObjectName ('type=Server,name=TBB_APserver,node=TBB_WMSNode,*')
 
 params = [AdminControl.makeObjectName (mySrvName)]
 
