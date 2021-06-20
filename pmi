@@ -1,0 +1,9 @@
+set perf [$AdminControl completeObjectName type=Perf,*]
+set perfON [$AdminControl makeObjectName $perf]
+set params [java::new {java.lang.Object[]} 1]
+#$params set 0 [java::new java.util.Locale "en-US"]
+$params set 0 [java::new java.util.Locale "zh-TW"]
+set sigs  [java::new {java.lang.String[]} 1]
+$sigs set 0 java.util.Locale
+set out [java::cast {com.ibm.websphere.pmi.PmiModuleConfig[]} [$AdminControl invoke_jmx $perfON getConfigs $params $sigs]]
+for {set i 0} {$i < [$out length]} {incr i 1} { puts [[$out get $i] toString] }
