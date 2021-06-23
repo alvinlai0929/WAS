@@ -1,6 +1,8 @@
 #wsadmin.bat -lang jython -f  per.py
 #wsadmin.bat -username wasadmin -password wasadmin -lang jython -f  per.py
-#wsadmin.bat -f per.py  -username wasadmin  -password wasadmin -p properties.txt
+#wsadmin.bat -javaoption "-Xms128m -Xmx1024m" -f per.py  -username wasadmin  -password wasadmin -p properties.txt
+
+-javaoption "-Xms128m -Xmx256m"
 
 
 
