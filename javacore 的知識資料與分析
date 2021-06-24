@@ -3,8 +3,13 @@ https://www.ibm.com/support/pages/java-core-debugging-using-ibm-thread-and-monit
 https://www.ibm.com/support/pages/ibm-thread-and-monitor-dump-analyzer-java-tmda
 javacore 的問題判別
 https://www.ibm.com/support/pages/using-java-core-files-debugging-purposes
+javag生命週期
+https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/
+java lock介紹
+https://tw511.com/a/01/25843.html
 
-
+JVM故障分析及性能優化系列之四：jstack生成的Thread Dump日誌線程狀態
+https://www.javatang.com/archives/2017/10/25/36441958.html
 
 xdump的收集
 
