@@ -22,3 +22,6 @@ fi
 ##########################排除符號##########################################################
 ./manageprofiles.sh -listProfiles|sed  's/\[//g'| sed 's/]//g'| sed 's/ //g' |sed 's/,/ /g'
 ##########################排除符號##########################################################
+Dmgr TCB_WMS TBB_WMS ESUN_WMS
+#依照找到的profile 去 was root/profiles/$ /logs/servers ,/nodeagents ,找*.pid
+
