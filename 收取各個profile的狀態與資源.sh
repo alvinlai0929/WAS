@@ -27,9 +27,9 @@ fi
 done
 
 
-nohup ./timer.sh &
+nohup ./timer_use.sh &
 
 每360秒 （六分鐘） 收一次 收100次
 
 ＰＩＤ
-21364882
+21364886
