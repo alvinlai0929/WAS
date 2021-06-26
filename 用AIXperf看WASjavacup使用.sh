@@ -53,14 +53,15 @@ fi
 TBBprofile=/usr/IBM/WebSphere/AppServer/profiles/TBB_WMS
 
 TBBpid=/logs/TBB_APserver/TBB_APserver.pid
+
 #TBBnodepid=/logs/nodeagent/nodeagent.pid
 
-if [ -s $TBBprofile$TBBpid ]
+if [ -s $TBBprofile$TBBpid ] #測試是否pid存在
 then
-    ps av `cat $TBBprofile$TBBpid`
+    ps av `cat $TBBprofile$TBBpid` #如果存在把pid列出來
 
 else
-    echo $TBBprofile$TBBpid "is not exit"
+    echo $TBBprofile$TBBpid "is not exit" #如果不存在把pid的檔案列出來，不存在
 fi
 ##完成###############################################################
 
