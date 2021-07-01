@@ -4,7 +4,7 @@ print "------------------------------------------------------------------------ 
 perfName = AdminControl.completeObjectName ('type=Perf,*')
 perfOName = AdminControl.makeObjectName (perfName)
 print perfOName
-print "------------------------------------------------------------------------ \n"
+print "------------------------------------------------------------------------ \
 
 
 print "\n---------------------------------------------------------------------- "
@@ -52,7 +52,7 @@ print "------------------------------------------------------------------------ 
 print "\n---------------------------------------------------------------------- "
 print "Invoke setCustomSetString operation"
 print "------------------------------------------------------------------------ "
-params = ['jvmRuntimeModule=1,2,3,4,5', java.lang.Boolean ('false')]
+params = ['jvmRuntimeModule=1,2,3,4,5,16,17,18,19,20', java.lang.Boolean ('false')]
 
 sigs  = ['java.lang.String', 'java.lang.Boolean']
 

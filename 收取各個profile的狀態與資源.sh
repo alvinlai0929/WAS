@@ -33,3 +33,17 @@ nohup ./timer_use.sh &
 
 ＰＩＤ
 21364886
+
+
+./serverStatus.sh -all -username wasadmin -password wasadmin|grep ADMU0509I |awk '{print $1$2$3$4$5$6$7$8}'
+
+for i in 10748160 5767650 8454418 21430776
+
+do
+echo $Time `ps av $i|grep$i`  >> cpu_memory_use_$Day.txt
+done
+
+PID
+21168550
+
+30秒一次 抓１０００次
