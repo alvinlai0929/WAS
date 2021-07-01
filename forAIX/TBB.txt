@@ -1,0 +1,37 @@
+perfName = AdminControl.completeObjectName ('type=Perf,*')
+perfOName = AdminControl.makeObjectName (perfName)
+
+params = ['extended']
+sigs  = ['java.lang.String']
+
+jvmName = AdminControl.completeObjectName ('type=JVM,process=TBB_APserver,*')
+
+#set jvmName [$AdminControl completeObjectName type=JVM,process=server1,*]
+
+params = [AdminControl.makeObjectName (jvmName)]
+
+sigs = ['javax.management.ObjectName']
+
+params = ['jvmRuntimeModule=*', java.lang.Boolean ('false')]
+
+sigs  = ['java.lang.String', 'java.lang.Boolean']
+
+jvmName = AdminControl.completeObjectName  ('type=JVM,process=TBB_APserver,*')
+
+params = [AdminControl.makeObjectName (jvmName), java.lang.Boolean ('false')]
+
+sigs = ['javax.management.ObjectName', 'java.lang.Boolean']
+
+params = ['pmi=l', java.lang.Boolean ('true')]
+
+sigs = ['java.lang.String', 'java.lang.Boolean']
+
+jvmName = AdminControl.completeObjectName  ('type=JVM,process=TBB_APserver,*')
+
+params = [AdminControl.makeObjectName (jvmName), java.lang.Boolean ('true')]
+
+sigs = ['javax.management.ObjectName', 'java.lang.Boolean']
+
+print AdminControl.invoke_jmx (perfOName, 'getStatsString', params, sigs)
+
+

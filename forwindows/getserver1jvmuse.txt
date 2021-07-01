@@ -1,0 +1,59 @@
+$AdminControl invoke $perfName getCustomSetString
+
+#取得 Perf MBean ObjectName
+set perfName [$AdminControl completeObjectName type=Perf,*]
+set perfOName [$AdminControl makeObjectName $perfName]
+
+#呼叫 getStatisticSet 作業利用這個方法來尋找目前有效的統計資料集：
+#這個方法會傳回下列值之一：basic、extended、all、none。
+$AdminControl invoke $perfName getStatisticSet
+
+
+
+#啟用使用統計資料集進行的監視。有效的統計資料集值如下：basic、extended、all、none。
+set params [java::new {java.lang.Object[]} 1]
+$params set 0 [java::new java.lang.String all]
+set sigs  [java::new {java.lang.String[]} 1]
+$sigs set 0 java.lang.String
+$AdminControl invoke_jmx $perfOName setStatisticSet $params $sigs
+
+#呼叫 getConfig 作業, 利用這個方法來尋找給定元件(basic、extended、all、none)之統計資料的相關資訊。
+#指定實際上有的 jvm  改為 type=JVM,process=server1,*
+
+#set jvmName [$AdminControl completeObjectName type=JVM,*]
+set jvmName [$AdminControl completeObjectName type=JVM,process=server1,*]
+set params [java::new {java.lang.Object[]} 1]
+$params set 0 [java::new javax.management.ObjectName $jvmName]
+set sigs  [java::new {java.lang.String[]} 1]
+$sigs set 0 javax.management.ObjectName
+$AdminControl invoke_jmx $perfOName getConfig $params $sigs
+
+
+#呼叫 getCustomSetString 作業,這個作業提供字串格式的現行監視規格：
+$AdminControl invoke $perfName getCustomSetString
+
+
+#呼叫 setCustomSetString 作業,這個作業可用來選擇性地啟用或停用統計資料。 
+#在下列指令中，啟用了 JVM 模組的統計資料 ID 1、2、3 和 4。 如果要啟用所有統計資料 ID，請使用星號（*）。
+set params [java::new {java.lang.Object[]} 2]
+
+$params set 0 [java::new java.lang.String jvmRuntimeModule=*]
+$params set 1 [java::new java.lang.Boolean false]
+set sigs  [java::new {java.lang.String[]} 2]
+$sigs set 0 java.lang.String
+$sigs set 1 java.lang.Boolean
+$AdminControl invoke_jmx $perfOName setCustomSetString $params $sigs
+
+#呼叫 getStatsObject 作業 這個作業用來取得給定的 MBean 的統計資料。 下列範例會取得 JVM 的統計資料：
+#指定實際上有的 jvm  改為 type=JVM,process=server1,*
+
+set jvmName [$AdminControl completeObjectName type=JVM,process=server1,*]
+#set jvmName [$AdminControl completeObjectName type=JVM,*]
+set params [java::new {java.lang.Object[]} 2]
+$params set 0 [java::new javax.management.ObjectName $jvmName]
+$params set 1 [java::new java.lang.Boolean false]
+set sigs  [java::new {java.lang.String[]} 2]
+$sigs set 0 javax.management.ObjectName
+$sigs set 1 java.lang.Boolean
+
+$AdminControl invoke_jmx $perfOName getStatsObject $params $sigs
