@@ -1,1 +1,16 @@
 #INSATLL install Manger
+chmod -R 777 /source/IM/IM192
+./installc -acceptLicense
+
+#was source 
+/source/WAS/90501
+
+#install manager Path
+/opt/IBM/InstallationManager/eclipse/tools
+imcl -c
+
+To uninstall Installation Manager from Linux, complete the following steps:
+Open a terminal window and run /var/ibm/InstallationManager/uninstall/uninstall if this was an installation by root.
+In the IBM Installation Manager Uninstall Packages wizard, click Next; then click Uninstall.
+#以下這個可以用
+/var/ibm/InstallationManager/uninstall/uninstallc
