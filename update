@@ -1,0 +1,108 @@
+#查看目前啟動的server
+ps -ef|grep java|awk '{print $1, $2,$NF}'
+
+
+#停server
+stopwas1
+stopwas2
+stopwas3
+stopwas4
+5
+6
+7
+
+
+
+wasadmin
+zinc65.39
+
+#如無法停止用kill
+kill -9 6554042  9896356   10027274 10879404 12714474  13435172 17957180
+
+
+#備份was檔案至tmp
+cd /tmp
+mkdir -p /tmp/20211216
+cd /tmp/20211216
+tar -cvf - /usr/WebSphere/AppServer/* |compress > WebSpherebak20211216.tar.Z
+
+#切換至wasadmin 用IM 做升級
+
+cd /usr/WebSphere/InstallationManager/eclipse/tools
+
+
+./imcl  updateAll -repositories /source/8.5.5.20/WAS_FIX/repository.config \
+                  -installationDirectory /usr/WebSphere/AppServer/ \
+                  -acceptLicense \
+                  -sp
+
+wasadmin.papa:/usr/WebSphere/InstallationManager/eclipse/tools>./imcl  updateAll -repositories /source/8.5.5.20/WAS_FIX/repository.config \
+>                   -installationDirectory /usr/WebSphere/AppServer/ \
+>                   -acceptLicense \
+>                   -sp
+                 25%                50%                75%                100%
+------------------|------------------|------------------|------------------|
+................................................................
+
+#完成後確認版本
+
+./imcl listInstalledPackages
+                 
+com.ibm.websphere.BASE.v85_8.5.5020.20210708_1826
+
+#安裝PH42728
+
+./imcl  updateAll -repositories /source/ifph42728/repository.config \
+                  -installationDirectory /usr/WebSphere/AppServer/ \
+                  -acceptLicense \
+                  -sp
+
+
+
+#完成後確認版本，多出一下這一行
+
+./imcl listInstalledPackages
+
+8.5.5.11-WS-WASProd-IFPH42728_8.5.5011.20211212_1616
+
+
+#以root修改權限，確保所有的檔案都屬於wasadmin
+
+chown -R  wasadmin:system  /usr/WebSphere/AppServer/*
+
+
+
+#以wasadmin啟動 server
+
+
+#修改java.security 
+
+cd /usr/WebSphere/AppServer/java/jre/lib/security
+
+cp -rp java.security java.security20211216
+
+vi java.security  
+
+/jdk.tls.disabledAlgorithms
+
+jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, RC4, DES, MD5withRSA, DH keySize < 1024, DESede, \ EC keySize < 224, 3DES_EDE_CBC, anon, NULL, DES_CBC, TLSv1.3, ChaCha20-Poly1305
+
+/security.provider.10
+
+security.provider.11=org.bouncycastle.jce.provider.BouncyCastleProvider
+
+#start all Server
+
+
+#Comsole >security > Global security > custom propertise
+
+Name:com.ibm.websphere.tls.disabledAlgorithms
+Value:SSLv3, TLSv1, TLSv1.1, RC4, DES, MD5withRSA, DH keySize < 1024, DESede, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, DES_CBC, TLSv1.3, ChaCha20-Poly1305
+
+#restart all server
+
+
+
+
+
+
